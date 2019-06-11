@@ -1,11 +1,11 @@
 package com.share.gudd.intentshare;
 
+import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
-import android.support.v4.view.LayoutInflaterFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,9 +13,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.share.gudd.intentshare.utils.Resource;
 import com.share.gudd.intentshare.utils.ShareToolUtil;
 
 import java.io.File;
@@ -25,20 +25,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    private Context mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mContext = this;
 
         ShareToolUtil.getPermission(this);
 
         final List<String> datas = new ArrayList<>();
         datas.add("微信好友-文本");
         datas.add("微信好友-图片");
+        datas.add("微信好友-文件");
         datas.add("微信朋友圈-单图");
         datas.add("QQ好友-文本");
         datas.add("QQ好友-图片");
+        datas.add("QQ好友-文件");
         datas.add("QQ空间");
         datas.add("新浪好友");
         datas.add("新浪微博");
@@ -59,10 +62,13 @@ public class MainActivity extends AppCompatActivity {
                         nativeShareTool.shareWechatFriend("Test Test test!!!");
                         break;
                     case "微信好友-图片":
-                        nativeShareTool.shareWechatFriend(getPicFile());
+                        nativeShareTool.shareWechatFriend(Resource.getInstance(mContext).getPicFile(),true);
+                        break;
+                    case "微信好友-文件":
+                        nativeShareTool.shareWechatFriend(Resource.getInstance(mContext).getDocFile(),false);
                         break;
                     case "微信朋友圈-单图":
-                        nativeShareTool.shareWechatMoment(getPicFile());
+                        nativeShareTool.shareWechatMoment(Resource.getInstance(mContext).getPicFile());
                         break;
                     case "QQ好友-文本":
                         nativeShareTool.shareQQ("Test test test!!!");
@@ -70,17 +76,18 @@ public class MainActivity extends AppCompatActivity {
                     case "QQ好友-图片":
                         nativeShareTool.shareImageToQQ(getPicBit());
                         break;
+                    case "QQ好友-文件":
+                        nativeShareTool.shareImageToQQ(Resource.getInstance(mContext).getDocFile());
+                        break;
                     case "QQ空间":
-                        nativeShareTool.shareImageToQQZone(getPicFile().getAbsolutePath());
+                        nativeShareTool.shareImageToQQZone(Resource.getInstance(mContext).getPicFile().getAbsolutePath());
                         break;
                     case "新浪好友":
-                        nativeShareTool.shareToSinaFriends(MainActivity.this, true,getPicFile().getAbsolutePath());
+                        nativeShareTool.shareToSinaFriends(MainActivity.this, true,Resource.getInstance(mContext).getPicFile().getAbsolutePath());
                         break;
                     case "新浪微博":
-                        nativeShareTool.shareToSinaFriends(MainActivity.this, false,getPicFile().getAbsolutePath());
+                        nativeShareTool.shareToSinaFriends(MainActivity.this, false,Resource.getInstance(mContext).getPicFile().getAbsolutePath());
                         break;
-
-
                 }
             }
         });
@@ -115,37 +122,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return mBitmap;
-    }
-
-    private File getPicFile() {
-        AssetManager assets = this.getResources().getAssets();
-        InputStream open = null;
-        File mFile = null;
-        Bitmap mBitmap;
-        try {
-            open = assets.open("share_pic.jpg");
-
-            BitmapFactory.Options bo  = new BitmapFactory.Options();
-            bo.inScaled = false;
-            bo.inPreferredConfig = Bitmap.Config.RGB_565;
-            bo.inJustDecodeBounds = false;
-            bo.inDither = true;
-            mBitmap = BitmapFactory.decodeStream(open, null, bo);
-
-            mFile = ShareToolUtil.saveSharePic(this, mBitmap);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            if (open != null){
-                try {
-                    open.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return mFile;
     }
 
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyHolder> {
