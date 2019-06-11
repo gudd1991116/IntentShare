@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         datas.add("QQ空间");
         datas.add("新浪好友");
         datas.add("新浪微博");
+        datas.add("直接添加QQ群号");
+
 
 
         final NativeShareTool nativeShareTool = NativeShareTool.getInstance(this);
@@ -87,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case "新浪微博":
                         nativeShareTool.shareToSinaFriends(MainActivity.this, false,Resource.getInstance(mContext).getPicFile().getAbsolutePath());
+                        break;
+                    case "直接添加QQ群号":
+                        AboutQQUtil.joinQQGroup(MainActivity.this, "CXaQmSGNixYtgpaRuUlxd0CwyMhQYkd_");
                         break;
                 }
             }

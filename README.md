@@ -58,3 +58,29 @@ NativeShareTool.getInstance(this).shareToSinaFriends(MainActivity.this, true,Res
 ```
 NativeShareTool.getInstance(this).shareToSinaFriends(MainActivity.this, false,Resource.getInstance(mContext).getPicFile().getAbsolutePath());
 ```
+### 将自己加入到QQ群
+>>> 加入QQ群可以参考网站：https://qun.qq.com/join.html，可以获取到QQ群相对应的key,使用提供的代码直接添加进入群
+```
+/****************
+* 该群目前为我个人新建测试群，无聊的小盆友也可以加入进来壮大我的号，哈哈
+* 发起添加群流程。群号：Android学习交流(610194891) 的 key 为： CXaQmSGNixYtgpaRuUlxd0CwyMhQYkd_
+* 调用 joinQQGroup(CXaQmSGNixYtgpaRuUlxd0CwyMhQYkd_) 即可发起手Q客户端申请加群 Android学习交流(610194891)
+*
+* @param key 由官网生成的key
+* @return 返回true表示呼起手Q成功，返回fals表示呼起失败
+******************/
+public boolean joinQQGroup(String key) {
+    Intent intent = new Intent();
+    intent.setData(Uri.parse("mqqopensdkapi://bizAgent/qm/qr?url=http%3A%2F%2Fqm.qq.com%2Fcgi-bin%2Fqm%2Fqr%3Ffrom%3Dapp%26p%3Dandroid%26k%3D" + key));
+   // 此Flag可根据具体产品需要自定义，如设置，则在加群界面按返回，返回手Q主界面，不设置，按返回会返回到呼起产品界面    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    try {
+        startActivity(intent);
+        return true;
+    } catch (Exception e) {
+        // 未安装手Q或安装的版本不支持
+        return false;
+    }
+}
+
+```
+
