@@ -59,7 +59,7 @@ NativeShareTool.getInstance(this).shareToSinaFriends(MainActivity.this, true,Res
 NativeShareTool.getInstance(this).shareToSinaFriends(MainActivity.this, false,Resource.getInstance(mContext).getPicFile().getAbsolutePath());
 ```
 ### 将自己加入到QQ群
->>> 加入QQ群可以参考网站：https://qun.qq.com/join.html，可以获取到QQ群相对应的key,使用提供的代码直接添加进入群
+加入QQ群可以参考网站：https://qun.qq.com/join.html， 可以获取到QQ群相对应的key,使用提供的代码直接添加进入群
 ```
 /****************
 * 该群目前为我个人新建测试群，无聊的小盆友也可以加入进来壮大我的号，哈哈
