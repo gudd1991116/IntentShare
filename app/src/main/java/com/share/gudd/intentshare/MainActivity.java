@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                         nativeShareTool.shareWechatFriend(Resource.getInstance(mContext).getPicFile(),true);
                         break;
                     case "微信好友-文件":
-                        nativeShareTool.shareWechatFriend(Resource.getInstance(mContext).getDocFile(),false);
+                        nativeShareTool.shareWechatFriend(Resource.getInstance(mContext).getDocFile("contract.docx"),false);
                         break;
                     case "微信朋友圈-单图":
                         nativeShareTool.shareWechatMoment(Resource.getInstance(mContext).getPicFile());
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                         nativeShareTool.shareImageToQQ(getPicBit());
                         break;
                     case "QQ好友-文件":
-                        nativeShareTool.shareImageToQQ(Resource.getInstance(mContext).getDocFile());
+                        nativeShareTool.shareImageToQQ(Resource.getInstance(mContext).getDocFile("newpdf.pdf"));
                         break;
                     case "QQ空间":
                         nativeShareTool.shareImageToQQZone(Resource.getInstance(mContext).getPicFile().getAbsolutePath());

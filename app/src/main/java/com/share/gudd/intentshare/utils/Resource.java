@@ -65,20 +65,21 @@ public class Resource {
 
     /**
      * 获取一般文件资源
+     * @param fileName 必须加上后缀  如：newpdf.pdf  | contract.docx, 这两个文件我写在assets目录中，我这里为方便参考写成这样，后面可自己修改
      * @return
      */
-    public File getDocFile() {
+    public File getDocFile(String fileName) {
         AssetManager assetManager = mContext.getResources().getAssets();
         InputStream open;
         File shareFile = null;
         try {
-            open = assetManager.open("contract.docx");
+            open = assetManager.open(fileName);
             String saveFilePath = Environment.getExternalStorageDirectory()+"/android/data/"+mContext.getPackageName()+"/shareFile/";
             File file = new File(saveFilePath);
             if (!file.exists()){
                 file.mkdirs();
             }
-            shareFile = new File(saveFilePath + "contract.docx");
+            shareFile = new File(saveFilePath + fileName);
             if (!shareFile.exists()) {
                 shareFile.createNewFile();
             }
