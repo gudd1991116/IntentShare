@@ -62,7 +62,7 @@ NativeShareTool.getInstance(this).shareToSinaFriends(MainActivity.this, false,Re
 加入QQ群可以参考网站：https://qun.qq.com/join.html， 可以获取到QQ群相对应的key,使用提供的代码直接添加进入群
 ```
 /****************
-* 该群目前为我个人新建测试群，无聊的小盆友也可以加入进来壮大我的号，哈哈
+* 该群目前为我个人新建测试群
 * 发起添加群流程。群号：610194891 的 key 为： CXaQmSGNixYtgpaRuUlxd0CwyMhQYkd_
 * 调用 joinQQGroup(CXaQmSGNixYtgpaRuUlxd0CwyMhQYkd_) 即可发起手Q客户端申请加群 Android学习交流(610194891)
 *
